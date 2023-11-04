@@ -12,7 +12,7 @@ datasource db {
 }
 
 model Color {
-  id     String @id @default(cuid())
+  id     String @id
   name   String
   hex    String
   clicks Int    @default(0)
