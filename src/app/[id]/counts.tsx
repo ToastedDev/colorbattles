@@ -24,7 +24,7 @@ export default function Counts({ color }: { color: Color }) {
     <div className="mx-auto max-w-3xl">
       <div className="bg-neutral-800 rounded-lg p-4 flex flex-col items-center justify-center">
         <h1 className="text-xl" style={{ color: color.hex }}>
-          {color.name}
+          {color.displayName}
         </h1>
         <Odometer
           value={clicks}
@@ -33,7 +33,7 @@ export default function Counts({ color }: { color: Color }) {
         <div className="mt-2 flex gap-2">
           <button
             onClick={() =>
-              fetch(`/api/color/${color.id}`, {
+              fetch(`/api/color/${color.name}`, {
                 method: "POST",
               })
             }
@@ -43,7 +43,7 @@ export default function Counts({ color }: { color: Color }) {
           </button>
           <button
             onClick={() =>
-              fetch(`/api/color/${color.id}`, {
+              fetch(`/api/color/${color.name}`, {
                 method: "DELETE",
               })
             }
