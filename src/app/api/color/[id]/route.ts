@@ -7,7 +7,7 @@ export const GET = async (
 ) => {
   const color = await db.color.findFirst({
     where: {
-      id: params.id,
+      name: params.id,
     },
   });
   if (!color) return notFound();
@@ -24,18 +24,17 @@ export const POST = async (
   _: any,
   { params }: { params: Record<"id", string> }
 ) => {
-  if (
-    (await db.color.count({
-      where: {
-        id: params.id,
-      },
-    })) < 1
-  )
-    return notFound();
+  const color = await db.color.findFirst({
+    where: {
+      name: params.id,
+    },
+  });
+
+  if (!color) return notFound();
 
   await db.color.update({
     where: {
-      id: params.id,
+      id: color.id,
     },
     data: {
       clicks: {
@@ -58,18 +57,17 @@ export const DELETE = async (
   _: any,
   { params }: { params: Record<"id", string> }
 ) => {
-  if (
-    (await db.color.count({
-      where: {
-        id: params.id,
-      },
-    })) < 1
-  )
-    return notFound();
+  const color = await db.color.findFirst({
+    where: {
+      name: params.id,
+    },
+  });
+
+  if (!color) return notFound();
 
   await db.color.update({
     where: {
-      id: params.id,
+      id: color.id,
     },
     data: {
       clicks: {

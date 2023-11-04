@@ -29,7 +29,7 @@ export default async function Home() {
       {colors.map((color) => (
         <Link
           key={color.id}
-          href={`/${color.id}`}
+          href={`/${color.name}`}
           className="w-20 h-20 flex items-center justify-center"
           style={{ backgroundColor: color.hex }}
         >
@@ -38,7 +38,7 @@ export default async function Home() {
               color: pickTextColorBasedOnBgColor(color.hex, "#fff", "#000"),
             }}
           >
-            {color.name}
+            {color.displayName}
           </p>
         </Link>
       ))}

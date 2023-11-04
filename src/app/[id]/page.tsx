@@ -9,7 +9,7 @@ export default async function Color({
 }) {
   const color = await db.color.findFirst({
     where: {
-      id: params.id,
+      name: params.id,
     },
   });
   if (!color) return notFound();
