@@ -34,7 +34,7 @@ export default async function Home() {
         <Link
           key={color.id}
           href={`/${color.name}`}
-          className="w-20 h-20 flex items-center justify-center"
+          className="w-20 h-20 flex items-center justify-center hover:opacity-50 transition-all"
           style={{ backgroundColor: color.hex }}
         >
           <p
