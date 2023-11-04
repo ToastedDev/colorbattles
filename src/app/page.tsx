@@ -2,7 +2,11 @@ import Link from "next/link";
 import { db } from "~/db";
 
 export default async function Home() {
-  const colors = await db.color.findMany();
+  const colors = await db.color.findMany({
+    orderBy: {
+      id: "asc",
+    },
+  });
 
   function pickTextColorBasedOnBgColor(
     bgColor: string,

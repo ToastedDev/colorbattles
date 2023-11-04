@@ -1,10 +1,14 @@
 "use client";
 
 import { Color } from "@prisma/client";
-import { useEffect, useState } from "react";
+import * as Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+import { useEffect, useRef, useState } from "react";
 import Odometer from "react-odometerjs";
+import { graphOptions } from "~/utils/graph-options";
 
 export default function Counts({ color }: { color: Color }) {
+  const chartRef = useRef<HighchartsReact.RefObject>(null);
   const [clicks, setClicks] = useState<number>(color.clicks);
 
   useEffect(() => {
@@ -13,12 +17,19 @@ export default function Counts({ color }: { color: Color }) {
         .then((res) => res.json())
         .then((data) => {
           setClicks(data.clicks);
+
+          if (chartRef.current?.chart.series[0].points.length === 3600)
+            chartRef.current?.chart.series[0].data[0].remove();
+          chartRef.current?.chart.series[0].addPoint([
+            Date.now(),
+            Number(data.clicks || 0),
+          ]);
         });
     }
 
     const interval = setInterval(getClicks, 2000);
     return () => clearInterval(interval);
-  }, [color, clicks]);
+  }, [color]);
 
   return (
     <div className="mx-auto max-w-3xl">
@@ -52,6 +63,13 @@ export default function Counts({ color }: { color: Color }) {
             -1
           </button>
         </div>
+      </div>
+      <div className="mt-4 bg-neutral-800 rounded-lg p-4 py-8">
+        <HighchartsReact
+          highcharts={Highcharts}
+          options={graphOptions(color.displayName, color.hex)}
+          ref={chartRef}
+        />
       </div>
     </div>
   );

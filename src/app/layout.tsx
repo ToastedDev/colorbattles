@@ -43,7 +43,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={[inter.className, roboto.variable].join(" ")}>
-      <body className="bg-neutral-900 text-white flex h-screen w-screen flex-col p-4">
+      <body className="bg-neutral-900 text-white flex h-screen flex-col">
         <Navbar />
         <main className="flex-grow p-4">{children}</main>
       </body>
