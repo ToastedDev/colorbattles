@@ -9,7 +9,7 @@ export default function Counts({ color }: { color: Color }) {
 
   useEffect(() => {
     async function getClicks() {
-      await fetch(`/api/color/${color.id}`)
+      await fetch(`/api/color/${color.name}`)
         .then((res) => res.json())
         .then((data) => {
           setClicks(data.clicks);
