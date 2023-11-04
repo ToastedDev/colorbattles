@@ -16,4 +16,6 @@ model Color {
   name   String
   hex    String
   clicks Int    @default(0)
+
+  @@index(id)
 }
